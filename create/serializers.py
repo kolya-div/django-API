@@ -1,7 +1,7 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 from .models import CreateModel
 
-class CreateSerializer(serializers.ModelSerializer):
+class CreateSerializer(ModelSerializer):
     class Meta:
         model = CreateModel
         fields = ('id', 'name', 'username', 'age', 'birthday','bio')

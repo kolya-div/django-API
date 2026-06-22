@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'create',
     'foydalanuvchilar',
     'userak',
-    'user',
+    'user3',
+    'user5',
+    'user7',
     'rest_framework',
     'rest_framework_simplejwt',
 ]
