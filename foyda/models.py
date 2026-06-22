@@ -9,3 +9,6 @@ class FoydaModel(models.Model):
     bio = models.TextField(max_length=700)
     def __str__(self):
         return self.name
+
+    class Meta:
+        db_table = "foyda"

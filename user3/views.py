@@ -2,39 +2,49 @@ from rest_framework.generics import (ListAPIView, RetrieveAPIView, UpdateAPIView
                                     ListCreateAPIView,RetrieveUpdateAPIView, RetrieveDestroyAPIView,RetrieveUpdateDestroyAPIView)
 from .models import ProfilakkModel 
 from .serializers import ProfilakkSerializer
+from rest_framework.permissions import IsAuthenticated
 
 class ProfilakkALLView(ListAPIView):
     queryset = ProfilakkModel.objects.all()
     serializer_class = ProfilakkSerializer
+    permission_classes = [IsAuthenticated]
 
 class ProfilakkDetailView(RetrieveAPIView):
     queryset = ProfilakkModel.objects.all()
     serializer_class = ProfilakkSerializer
+    permission_classes = [IsAuthenticated]
 
 class ProfilakkUpdateView(UpdateAPIView):
     queryset = ProfilakkModel.objects.all()
     serializer_class = ProfilakkSerializer
+    permission_classes = [IsAuthenticated]
 
 class ProfilakkCreateView(CreateAPIView):
     queryset = ProfilakkModel.objects.all()
     serializer_class = ProfilakkSerializer
+    permission_classes = [IsAuthenticated]
 
 class ProfilakkDeleteView(DestroyAPIView):
     queryset = ProfilakkModel.objects.all()
     serializer_class = ProfilakkSerializer
+    permission_classes = [IsAuthenticated]
 
 class ProfilakkAllCreateView(ListCreateAPIView):
     queryset = ProfilakkModel.objects.all()
     serializer_class = ProfilakkSerializer
+    permission_classes = [IsAuthenticated]
 
 class ProfilakkDetailUpdate(RetrieveUpdateAPIView):
     queryset = ProfilakkModel.objects.all()
     serializer_class = ProfilakkSerializer
+    permission_classes = [IsAuthenticated]
 
 class ProfilakkDetaildeleteView(RetrieveDestroyAPIView):
     queryset = ProfilakkModel.objects.all()
     serializer_class = ProfilakkSerializer
+    permission_classes = [IsAuthenticated]
 
 class ProfilakkRetrieveUpdateDestory(RetrieveUpdateDestroyAPIView):
     queryset = ProfilakkModel.objects.all()
     serializer_class = ProfilakkSerializer
+    permission_classes = [IsAuthenticated]

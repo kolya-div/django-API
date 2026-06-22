@@ -14,3 +14,6 @@ class ProfilModel(models.Model):
     bio = models.TextField(max_length=700)
     def __str__(self):
         return self.username
+
+    class Meta:
+        db_table = "userakk"

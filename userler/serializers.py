@@ -1,7 +1,7 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 from .models import AkkModel
 
-class AkkSerializer(serializers.ModelSerializer):
+class AkkSerializer(ModelSerializer):
     class Meta:
         model = AkkModel
         fields = ('id', 'name', 'username', 'age', 'birthday','bio')
