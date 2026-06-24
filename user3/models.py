@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class ProfilakkModel(models.Model):
     name = models.CharField(max_length=90)
@@ -12,6 +12,7 @@ class ProfilakkModel(models.Model):
     )
     gender = models.CharField(max_length=90, choices=g)
     email = models.EmailField()
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
     def __str__(self):
         return self.username
     class Meta:

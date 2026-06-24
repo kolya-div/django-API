@@ -1,10 +1,37 @@
-.venv/
-.venv
+# Django / Python
 venv/
-venv
-.venv\
-.venv
-venv\
-.env/
+env/
+ENV/
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Ma'lumotlar bazasi
+db.sqlite3
+db.sqlite3-journal
+
+# Atrof-muhit o'zgaruvchilari (Maxfiy ma'lumotlar)
 .env
-evn\
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Django media va statik fayllar
+media/
+static/
+
+# IDE va muharrirlar
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS (Operatsion tizim) fayllari
+.DS_Store
+Thumbs.db

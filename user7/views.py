@@ -5,18 +5,21 @@ from rest_framework.generics import (ListAPIView, RetrieveAPIView,
 from .models import User7Model
 from .serializers import User7Serilizer
 from rest_framework.permissions import IsAuthenticated
+from .permission import IsOwnerPermission
 
 
 class userAllView(ListAPIView):
-    queryset = User7Model.objects.all()
     serializer_class = User7Serilizer
     permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        return User7Model.objects.filter(user=self.request.user)
 
 
 class userDetailView(RetrieveAPIView):
-    queryset = User7Model.objects.all()
     serializer_class = User7Serilizer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwnerPermission]
+    def get_queryset(self):
+        return User7Model.objects.filter(user=self.request.user)
 
 
 class userUpdateView(UpdateAPIView):
