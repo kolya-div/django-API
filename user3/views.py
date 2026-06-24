@@ -3,16 +3,19 @@ from rest_framework.generics import (ListAPIView, RetrieveAPIView, UpdateAPIView
 from .models import ProfilakkModel 
 from .serializers import ProfilakkSerializer
 from rest_framework.permissions import IsAuthenticated
+from .permission import IsOwnerPermission
 
 class ProfilakkALLView(ListAPIView):
-    queryset = ProfilakkModel.objects.all()
     serializer_class = ProfilakkSerializer
     permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        return ProfilakkModel.objects.filter(user=self.request.user)
 
 class ProfilakkDetailView(RetrieveAPIView):
-    queryset = ProfilakkModel.objects.all()
     serializer_class = ProfilakkSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwnerPermission]
+    def get_queryset(self):
+        return ProfilakkModel.objects.filter(user=self.request.user)
 
 class ProfilakkUpdateView(UpdateAPIView):
     queryset = ProfilakkModel.objects.all()

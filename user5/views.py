@@ -5,17 +5,19 @@ from rest_framework.generics import (ListAPIView, RetrieveAPIView,
 from .models import User5Model
 from .serializers import User5Serilizer
 from rest_framework.permissions import IsAuthenticated
-
+from .permission import IsOwnerPermission
 
 class userAllView(ListAPIView):
-    queryset = User5Model.objects.all()
     serializer_class = User5Serilizer
     permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        return User5Model.objects.filter(user=self.request.user)
 
 class userDetailView(RetrieveAPIView):
-    queryset = User5Model.objects.all()
     serializer_class = User5Serilizer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwnerPermission]
+    def get_queryset(self):
+        return User5Model.objects.filter(user=self.request.user)    
 
 class userUpdateView(UpdateAPIView):
     queryset = User5Model.objects.all()

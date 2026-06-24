@@ -3,16 +3,20 @@ from rest_framework.generics import (ListAPIView, RetrieveAPIView, UpdateAPIView
 from .models import ProfilModel 
 from .serializers import ProfilSerializer
 from rest_framework.permissions import IsAuthenticated
+from .permission import IsOwnerPermission
 
 class ProfilALLView(ListAPIView):
-    queryset = ProfilModel.objects.all()
     serializer_class = ProfilSerializer
     permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        return ProfilModel.objects.filter(user=self.request.user)
 
 class ProfilDetailView(RetrieveAPIView):
-    queryset = ProfilModel.objects.all()
     serializer_class = ProfilSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwnerPermission]
+    def get_queryset(self):
+        return ProfilModel.objects.filter(user=self.request.user)
+
 
 class ProfilUpdateView(UpdateAPIView):
     queryset = ProfilModel.objects.all()

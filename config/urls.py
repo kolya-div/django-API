@@ -33,6 +33,7 @@ urlpatterns = [
     path('userler/',include('userler.urls')),
     path('user5/',include('user5.urls')),
     path('user7/',include('user7.urls')),
+    path('maglumat/',include('maglumat.urls')),
     
 
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

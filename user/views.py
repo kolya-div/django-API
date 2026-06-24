@@ -3,19 +3,22 @@ from rest_framework.generics import (ListAPIView, RetrieveAPIView, UpdateAPIView
 from .models import UserModel 
 from .serializers import UserSerializer
 from rest_framework.permissions import IsAuthenticated
+from .permission import IsOwnerPermission
 
 
 
 
 class UserALLView(ListAPIView):
-    queryset = UserModel.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        return UserModel.objects.filter(user=self.request.user)
 
 class UserDetailView(RetrieveAPIView):
-    queryset = UserModel.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwnerPermission]
+    def get_queryset(self):
+        return UserModel.objects.filter(user=self.request.user)
 
 class UserUpdateView(UpdateAPIView):
     queryset = UserModel.objects.all()

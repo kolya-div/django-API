@@ -3,16 +3,21 @@ from rest_framework.generics import (ListAPIView, RetrieveAPIView, UpdateAPIView
 from .models import PaydaModel 
 from .serializers import PaydaSerializer
 from rest_framework.permissions import IsAuthenticated
+from .permission import IsOwnerPermission
 
 class PaydaALLView(ListAPIView):
     queryset = PaydaModel.objects.all()
     serializer_class = PaydaSerializer
     permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        return PaydaModel.objects.filter(user=self.request.user)
 
 class PaydaDetailView(RetrieveAPIView):
     queryset = PaydaModel.objects.all()
     serializer_class = PaydaSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwnerPermission]
+    def get_queryset(self): 
+        return PaydaModel.objects.filter(user=self.request.user)
 
 class PaydaUpdateView(UpdateAPIView):
     queryset = PaydaModel.objects.all()

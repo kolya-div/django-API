@@ -3,16 +3,19 @@ from rest_framework.generics import (ListAPIView, RetrieveAPIView, UpdateAPIView
 from .models import AkkModel 
 from .serializers import AkkSerializer
 from  rest_framework.permissions import IsAuthenticated
+from .permission import IsOwnerPermission
 
 class AkkALLView(ListAPIView):
-    queryset = AkkModel.objects.all()
     serializer_class = AkkSerializer
     permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        return AkkModel.objects.filter(user=self.request.user)
 
 class AkkDetailView(RetrieveAPIView):
-    queryset = AkkModel.objects.all()
     serializer_class = AkkSerializer
-    permission_classes = [IsAuthenticated] 
+    permission_classes = [IsAuthenticated, IsOwnerPermission] 
+    def get_queryset(self):
+        return AkkModel.objects.filter(user=self.request.user)
 
 class AkkUpdateView(UpdateAPIView):
     queryset = AkkModel.objects.all()
